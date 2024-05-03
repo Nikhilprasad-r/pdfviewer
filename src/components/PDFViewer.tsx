@@ -29,42 +29,40 @@ const PDFViewer: FC<PDFViewerProps> = ({ fileUrl }) => {
   const fullScreenPluginInstance = fullScreenPlugin();
   const { EnterFullScreen } = fullScreenPluginInstance;
   return (
-    <div className="max-w-[35rem]">
-      <Worker workerUrl={pdfjs.GlobalWorkerOptions.workerSrc}>
-        <div className="h-[750px] w-[1200px]">
-          <div className="flex justify-around">
-            <div className="flex">
-              <ZoomOut />
-              <ZoomPopover />
-              <ZoomIn />
-            </div>
-            <div className="flex">
-              <GoToFirstPage />
-
-              <GoToPreviousPage />
-              <CurrentPageInput />
-              <div className="my-auto text-xl">
-                {"/"}
-                <NumberOfPages />
-              </div>
-              <GoToNextPage />
-              <GoToLastPage />
-            </div>
-
-            <EnterFullScreen />
-          </div>
-          <Viewer
-            fileUrl={fileUrl}
-            plugins={[
-              zoomPluginInstance,
-              pageNavigationPluginInstance,
-              fullScreenPluginInstance,
-            ]}
-            theme="dark"
-          />
+    <Worker workerUrl={pdfjs.GlobalWorkerOptions.workerSrc}>
+      <div className="flex justify-around w-[1200px]">
+        <div className="flex">
+          <ZoomOut />
+          <ZoomPopover />
+          <ZoomIn />
         </div>
-      </Worker>
-    </div>
+        <div className="flex">
+          <GoToFirstPage />
+
+          <GoToPreviousPage />
+          <CurrentPageInput />
+          <div className="my-auto text-xl">
+            {"/"}
+            <NumberOfPages />
+          </div>
+          <GoToNextPage />
+          <GoToLastPage />
+        </div>
+
+        <EnterFullScreen />
+      </div>
+      <div className="h-[750px] w-[1200px]">
+        <Viewer
+          fileUrl={fileUrl}
+          plugins={[
+            zoomPluginInstance,
+            pageNavigationPluginInstance,
+            fullScreenPluginInstance,
+          ]}
+          theme="dark"
+        />
+      </div>
+    </Worker>
   );
 };
 
